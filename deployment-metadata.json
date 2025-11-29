@@ -1,0 +1,162 @@
+{
+    "version": 1,
+    "samplesPerInference": 9216,
+    "axesCount": 1,
+    "classes": [
+        "no",
+        "yes"
+    ],
+    "deployCounter": 1,
+    "folders": {
+        "input": "/home/input",
+        "output": "/home/output"
+    },
+    "frequency": 0,
+    "impulse": {
+        "inputBlocks": [
+            {
+                "id": 4,
+                "type": "image",
+                "name": "Image",
+                "title": "Image data",
+                "resizeMethod": "lanczos3",
+                "imageWidth": 96,
+                "imageHeight": 96,
+                "resizeMode": "fit-short",
+                "cropAnchor": "middle-center",
+                "createdBy": "createImpulse",
+                "createdAt": "2025-11-29T11:06:45.799Z"
+            }
+        ],
+        "dspBlocks": [
+            {
+                "metadata": {
+                    "created": "2025-11-29T16:29:09.283Z",
+                    "dspConfig": {
+                        "options": {
+                            "channels": "RGB"
+                        },
+                        "performance": {
+                            "latency": 4,
+                            "ram": 4096
+                        },
+                        "calculateFeatureImportance": false,
+                        "normalizeData": "none"
+                    },
+                    "labels": [
+                        "no",
+                        "yes"
+                    ],
+                    "valuesPerAxis": 27648,
+                    "windowCount": 5423,
+                    "featureCount": 27648,
+                    "windowSizeMs": 0,
+                    "windowIncreaseMs": 0,
+                    "frequency": 0,
+                    "padZeros": false,
+                    "outputConfig": {
+                        "type": "image",
+                        "shape": {
+                            "width": 96,
+                            "height": 96,
+                            "channels": 3,
+                            "frames": 1
+                        }
+                    },
+                    "performance": {
+                        "latency": 4,
+                        "ram": 4096
+                    },
+                    "fftUsed": [],
+                    "includeEmptyLabels": false,
+                    "inputShape": [
+                        9216
+                    ],
+                    "includedSamplesAreInOrder": true,
+                    "resizingAlgorithmVersion": 2,
+                    "doesntContainNegativeSampleIds": true
+                },
+                "id": 5,
+                "type": "image",
+                "name": "Image",
+                "axes": [
+                    "image"
+                ],
+                "title": "Image",
+                "input": 4,
+                "implementationVersion": 1,
+                "namedAxes": [
+                    {
+                        "name": "Image",
+                        "required": true,
+                        "selectedAxis": "image"
+                    }
+                ],
+                "createdBy": "createImpulse",
+                "createdAt": "2025-11-29T11:06:45.799Z"
+            }
+        ],
+        "learnBlocks": [
+            {
+                "thresholds": {
+                    "minConfidenceRating": 0.6
+                },
+                "id": 13,
+                "type": "keras-transfer-image",
+                "name": "Transfer learning",
+                "dsp": [
+                    5
+                ],
+                "title": "Transfer Learning (Images)",
+                "createdBy": "createImpulse",
+                "createdAt": "2025-11-29T16:14:52.516Z"
+            }
+        ]
+    },
+    "project": {
+        "name": "micro sleep detector",
+        "id": 840705,
+        "owner": "csahu",
+        "apiKey": "ei_c023a53c2a994ad176e9305c6758267dfde6d0804e796cfa806439d66030c967",
+        "studioHost": "studio.edgeimpulse.com"
+    },
+    "sensor": "camera",
+    "tfliteModels": [
+        {
+            "arenaSize": 361216,
+            "inputFrameSize": 27648,
+            "inputTensor": "input_1",
+            "outputTensor": "dense_1/Softmax:0",
+            "details": {
+                "modelType": "int8",
+                "inputs": [
+                    {
+                        "dataType": "int8",
+                        "name": "serving_default_x:0",
+                        "shape": [
+                            1,
+                            96,
+                            96,
+                            3
+                        ],
+                        "quantizationScale": 0.0032910420559346676,
+                        "quantizationZeroPoint": -128
+                    }
+                ],
+                "outputs": [
+                    {
+                        "dataType": "int8",
+                        "name": "StatefulPartitionedCall:0",
+                        "shape": [
+                            1,
+                            2
+                        ],
+                        "quantizationScale": 0.00390625,
+                        "quantizationZeroPoint": -128
+                    }
+                ]
+            },
+            "modelPath": "/home/input/trained.tflite"
+        }
+    ]
+}
